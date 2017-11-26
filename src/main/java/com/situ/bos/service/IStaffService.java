@@ -17,4 +17,10 @@ public interface IStaffService {
 	 */
 	void pageQuery(PageBean pageBean);
 
+	/**
+	 * 删除取派员
+	 * @param ids
+	 */
+	void deleteBatch(String ids);
+
 }

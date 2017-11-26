@@ -82,7 +82,7 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	
 	private Integer page;//第几页
 	private Integer rows;//每页有多少数据
-
+	protected String ids;
 	/**
 	 * @return the page
 	 */
@@ -111,6 +111,14 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	public void setRows(Integer rows) {
 		this.rows = rows;
 		pageBean.setPageSize(rows);
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
 	}
 	
 	

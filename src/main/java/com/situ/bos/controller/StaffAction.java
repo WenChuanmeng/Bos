@@ -26,4 +26,12 @@ public class StaffAction extends BaseAction<Staff> {
 		object2jsonByEasyUI(pageBean);
 		return NONE;
 	}
+	
+	/**
+	 * 删除取派员
+	 */
+	public String  deleteBatch() {
+		staffService.deleteBatch(ids);
+		return LIST;
+	}
 }
