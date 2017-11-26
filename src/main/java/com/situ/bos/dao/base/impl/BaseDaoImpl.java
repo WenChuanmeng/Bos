@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
@@ -86,6 +88,18 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		List<?> rows = getHibernateTemplate().findByCriteria(deCriteria, firstResult, pageSize);
 		pageBean.setRows(rows);
 		
+	}
+
+	@Override
+	public void excuteUpdate(String queryName, Object... objects) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		Query query = session.getNamedQuery(queryName);
+		int i = 0;
+		for (Object object : objects) {
+			query.setParameter(i++, object);
+		}
+		//执行更新
+		query.executeUpdate();
 	}
 
 }

@@ -18,6 +18,9 @@ import net.sf.json.JsonConfig;
 
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 
+	protected static final String HOME = "home";
+	protected static final String LIST = "list";
+	
 	protected PageBean pageBean = new PageBean();
 	
 	protected  T model;

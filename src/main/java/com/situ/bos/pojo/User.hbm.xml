@@ -20,5 +20,8 @@
      		<property name="telephone" column="telephone" ></property>
      		<property name="remark" column="remark" ></property>
      		
-     	</class>	
+     	</class>
+     	<query name="user.editPassword">
+     		UPDATE User SET password = ? WHERE id=?
+     	</query>	
 	</hibernate-mapping>

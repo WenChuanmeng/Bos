@@ -7,16 +7,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.situ.bos.common.ServerResponse;
 import com.situ.bos.controller.base.BaseAction;
 import com.situ.bos.pojo.User;
 import com.situ.bos.service.IUserService;
+import com.situ.bos.util.BosUtils;
 
 
 @Controller
 @Scope("prototype")
 public class UserAction extends BaseAction<User> {
 
-	private static final String HOME = "home";
 	@Autowired
 	private IUserService userService;
 	
@@ -35,7 +36,7 @@ public class UserAction extends BaseAction<User> {
 			User user = userService.login(model);
 			if (user != null) {
 				//用户名和密码正确
-				ServletActionContext.getRequest().getSession().setAttribute("user", user);
+				ServletActionContext.getRequest().getSession().setAttribute("loginUser", user);
 				return HOME;
 			} else {
 				//用户名或密码错误
@@ -52,5 +53,24 @@ public class UserAction extends BaseAction<User> {
 	public String loginOut() {
 		ServletActionContext.getRequest().getSession().invalidate();
 		return LOGIN;
+	}
+	
+	public String editPassword() {
+		Integer result = 0;
+		User user = BosUtils.getLoginUser();
+		
+		try {
+			userService.editPassword(user.getId(), model.getPassword());
+		} catch (Exception e) {
+			result = 1;
+		}
+		
+		if (result == 0) {
+			object2json(new ServerResponse().createSUCCESS("修改成功"));
+		} else {
+			object2json(new ServerResponse().createERROR("修改失败"));
+
+		}
+		return NONE;
 	}
 }

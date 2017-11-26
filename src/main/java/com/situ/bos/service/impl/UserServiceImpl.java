@@ -10,7 +10,7 @@ import com.situ.bos.service.IUserService;
 
 @Service
 @Transactional
-public class UserImpl implements IUserService {
+public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;
@@ -19,6 +19,11 @@ public class UserImpl implements IUserService {
 	public User login(User model) {
 		
 		return userDao.findByUsernameAndPassword(model);
+	}
+
+	@Override
+	public void editPassword(String id, String password) {
+		userDao.excuteUpdate("user.editPassword", password, id);
 	}
 
 }
