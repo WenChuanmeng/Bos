@@ -23,4 +23,17 @@ public interface IStaffService {
 	 */
 	void deleteBatch(String ids);
 
+	/**
+	 * 根据id查找取派员
+	 * @param id
+	 * @return Staff
+	 */
+	Staff findById(String id);
+
+	/**
+	 * 修改取派员
+	 * @param staff
+	 */
+	void update(Staff staff);
+
 }

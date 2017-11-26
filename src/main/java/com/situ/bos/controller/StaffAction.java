@@ -34,4 +34,19 @@ public class StaffAction extends BaseAction<Staff> {
 		staffService.deleteBatch(ids);
 		return LIST;
 	}
+	
+	/**
+	 * 修改取派员信息
+	 */
+	public String update() {
+		
+		Staff staff = staffService.findById(model.getId());
+		staff.setName(model.getName());
+		staff.setTelephone(model.getTelephone());
+		staff.setHaspda(model.getHaspda());
+		staff.setStandard(model.getStandard());
+		staff.setStation(model.getStation());
+		staffService.update(staff);
+		return LIST;
+	}
 }

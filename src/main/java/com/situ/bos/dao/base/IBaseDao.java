@@ -11,7 +11,7 @@ public interface IBaseDao<T> {
 	public void save(T entity);
 	public void delete(T entity);
 	public void update(T entity);
-	public void findById(Serializable id);
+	public T findById(Serializable id);
 	public List<T> findAll();
 	public void pageQuery(PageBean pageBean);
 	public void excuteUpdate(String queryName, Object... objects);

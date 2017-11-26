@@ -60,8 +60,8 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	}
 
 	@Override
-	public void findById(Serializable id) {
-		getHibernateTemplate().get(entityClass, id);
+	public T findById(Serializable id) {
+		return getHibernateTemplate().get(entityClass, id);
 	}
 
 	@Override
