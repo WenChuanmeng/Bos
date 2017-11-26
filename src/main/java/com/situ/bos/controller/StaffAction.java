@@ -19,4 +19,11 @@ public class StaffAction extends BaseAction<Staff> {
 		staffService.add(model);
 		return LIST;
 	}
+	
+	public String pageQuery() {
+		
+		staffService.pageQuery(pageBean);
+		object2jsonByEasyUI(pageBean);
+		return NONE;
+	}
 }

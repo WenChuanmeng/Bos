@@ -93,14 +93,14 @@
 		}
 	}, {
 		field : 'deltag',
-		title : '是否作废',
+		title : '是否删除',
 		width : 120,
 		align : 'center',
 		formatter : function(data,row, index){
 			if(data=="0"){
 				return "正常使用"
 			}else{
-				return "已作废";
+				return "已删除";
 			}
 		}
 	}, {
@@ -129,7 +129,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/staff.json",
+			url : "${pageContext.request.contextPath}/staffAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
