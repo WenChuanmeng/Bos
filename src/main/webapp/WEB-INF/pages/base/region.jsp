@@ -26,6 +26,9 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath }/js/jquery.ocupload.js"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addRegionWindow').window("open");
@@ -110,7 +113,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/region.json",
+			url : "${pageContext.request.contextPath}/regionAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -126,6 +129,11 @@
 	        height: 400,
 	        resizable:false
 	    });
+		
+		$("#button-import").upload({
+			action:'${pageContext.request.contextPath}/regionAction_impXls.action',
+			name:'regionFile'
+		});
 		
 	});
 
