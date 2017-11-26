@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 
 import com.situ.bos.controller.base.BaseAction;
 import com.situ.bos.pojo.Region;
+import com.situ.bos.pojo.Subarea;
 import com.situ.bos.service.IRegionService;
 import com.situ.bos.util.PinYin4jUtils;
 
@@ -38,7 +39,7 @@ public class RegionAction extends BaseAction<Region> {
 	public String pageQuery() {
 		
 		regionService.pageQuery(pageBean);
-		object2jsonByEasyUI(pageBean);
+		object2json(pageBean, new String[]{"currentPage","deCriteria","currentSize","subareas"});
 		return NONE;
 	}
 	
@@ -85,6 +86,37 @@ public class RegionAction extends BaseAction<Region> {
 			reList.add(region);
 		}
 		regionService.saveBatch(reList);
+		return NONE;
+	}
+	
+	public String add() {
+		
+		String province = model.getProvince();
+		String city = model.getCity();
+		String district = model.getDistrict();
+		String[] provinceStr = PinYin4jUtils.getHeadByString(province);
+		String[] cityStr = PinYin4jUtils.getHeadByString(city);
+		String[] districtStr = PinYin4jUtils.getHeadByString(district);
+		String proStr = StringUtils.join(provinceStr);
+		String cStr = StringUtils.join(cityStr);
+		String disStr = StringUtils.join(districtStr);
+		String shortcode = proStr + cStr + disStr;
+		String citycode = PinYin4jUtils.hanziToPinyin(city, "");
+		model.setShortcode(shortcode);
+		model.setCitycode(citycode);
+		regionService.add(model);
+		return NONE;
+	}
+	
+	public String listAjax() {
+		
+		List<Region> list = null;
+		if (StringUtils.isNotBlank(q)) {
+			list = regionService.findListByQ(q);
+		} else {
+			list = regionService.findAll();
+		}
+		object2jsonList(list, new String[]{"subareas"});
 		return NONE;
 	}
 }

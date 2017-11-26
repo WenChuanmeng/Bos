@@ -135,6 +135,13 @@
 			name:'regionFile'
 		});
 		
+		$("#save").click(function(){
+			//表单校验，如果通过，提交表单
+			var v = $("#addRegionForm").form("validate");
+			if(v){
+				$("#addRegionForm").submit();
+			}
+		});
 	});
 
 	function doDblClickRow(){
@@ -146,6 +153,7 @@
 	<div region="center" border="false">
     	<table id="grid"></table>
 	</div>
+	<!-- 添加 -->
 	<div class="easyui-window" title="区域添加修改" id="addRegionWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
@@ -154,10 +162,14 @@
 		</div>
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addRegionForm" action="${pageContext.request.contextPath }/regionAction_add.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">区域信息</td>
+					</tr>
+					<tr>
+						<td>编号</td>
+						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>省</td>
@@ -175,17 +187,11 @@
 						<td>邮编</td>
 						<td><input type="text" name="postcode" class="easyui-validatebox" required="true"/></td>
 					</tr>
-					<tr>
-						<td>简码</td>
-						<td><input type="text" name="shortcode" class="easyui-validatebox" required="true"/></td>
-					</tr>
-					<tr>
-						<td>城市编码</td>
-						<td><input type="text" name="citycode" class="easyui-validatebox" required="true"/></td>
-					</tr>
 					</table>
 			</form>
 		</div>
 	</div>
+	
+	<!-- 修改 -->
 </body>
 </html>

@@ -19,4 +19,23 @@ public interface IRegionService {
 	 */
 	void pageQuery(PageBean pageBean);
 
+	/**
+	 * 添加区域
+	 * @param model
+	 */
+	void add(Region model);
+
+	/**
+	 * 根据条件查询
+	 * @param q
+	 * @return
+	 */
+	List<Region> findListByQ(String q);
+
+	/**
+	 * 查找所有
+	 * @return
+	 */
+	List<Region> findAll();
+
 }

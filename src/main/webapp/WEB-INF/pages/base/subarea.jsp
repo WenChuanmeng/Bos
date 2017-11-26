@@ -160,7 +160,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/subarea.json",
+			url : "${pageContext.request.contextPath }/subareaAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -191,6 +191,15 @@
 			alert("执行查询...");
 		});
 		
+		$("#save").click(function(){
+			//表单校验，如果通过，提交表单
+			var v = $("#addSubareaForm").form("validate");
+			if(v){
+				//$("#addStaffForm").form("submit");
+				$("#addSubareaForm").submit();
+			}
+		});
+		
 	});
 
 	function doDblClickRow(){
@@ -211,20 +220,17 @@
 		</div>
 		
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addSubareaForm" action="${pageContext.request.contextPath }/subareaAction_add.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">分区信息</td>
 					</tr>
 					<tr>
-						<td>分拣编码</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
-					<tr>
 						<td>选择区域</td>
 						<td>
 							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+    							data-options="valueField:'id',textField:'name',mode:'remote',
+    							url:'${pageContext.request.contextPath }/regionAction_listAjax.action'" />  
 						</td>
 					</tr>
 					<tr>

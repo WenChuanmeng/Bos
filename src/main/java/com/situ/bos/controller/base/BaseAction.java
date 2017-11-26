@@ -3,6 +3,7 @@ package com.situ.bos.controller.base;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.situ.bos.vo.PageBean;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
@@ -75,6 +77,21 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 		}
 	}
 	
+	public void object2jsonList(List list, String... excludes) {
+		JsonConfig jsonConfig = new JsonConfig();
+		//指定那些属性不进行json转换
+		jsonConfig.setExcludes(excludes);
+		String json = JSONArray.fromObject(list, jsonConfig).toString();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json;charset=utf-8");
+		try {
+			response.getWriter().println(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void object2jsonByEasyUI(Object object) {
 		object2json(object, new String[]{"currentPage","deCriteria","currentSize"});
 	}
@@ -82,7 +99,8 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	
 	private Integer page;//第几页
 	private Integer rows;//每页有多少数据
-	protected String ids;
+	protected String ids;//选择的ID
+	protected String q;
 	/**
 	 * @return the page
 	 */
@@ -120,7 +138,15 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	public void setIds(String ids) {
 		this.ids = ids;
 	}
+
+	/**
+	 * @param q the q to set
+	 */
+	public void setQ(String q) {
+		this.q = q;
+	}
 	
 	
+
 
 }
