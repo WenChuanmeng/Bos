@@ -1,5 +1,7 @@
 package com.situ.bos.service;
 
+import java.util.List;
+
 import com.situ.bos.pojo.Subarea;
 import com.situ.bos.vo.PageBean;
 
@@ -16,5 +18,11 @@ public interface ISubareaService {
 	 * @param model
 	 */
 	void add(Subarea model);
+
+	/**
+	 * 查找所有分区的信息
+	 * @return List<Subarea>
+	 */
+	List<Subarea> findAll();
 
 }

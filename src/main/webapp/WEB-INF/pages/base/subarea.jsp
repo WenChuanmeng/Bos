@@ -44,7 +44,7 @@
 	}
 	
 	function doExport(){
-		alert("导出");
+		window.location.href="${pageContext.request.contextPath}/subareaAction_exportXls.action";
 	}
 	
 	function doImport(){
