@@ -25,4 +25,10 @@ public interface ISubareaService {
 	 */
 	List<Subarea> findAll();
 
+	/**
+	 * 查询所有未关联到定去的分区
+	 * @return List<Subarea>
+	 */
+	List<Subarea> findListNotAssociation();
+
 }

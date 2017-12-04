@@ -1,5 +1,7 @@
 package com.situ.bos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -48,5 +50,15 @@ public class StaffAction extends BaseAction<Staff> {
 		staff.setStation(model.getStation());
 		staffService.update(staff);
 		return LIST;
+	}
+	
+	/**
+	 * 查找派送员
+	 */
+	public String listajax() {
+		
+		List<Staff> list = staffService.findListNotDelete();
+		object2jsonList(list, new String[]{"decidedzones"});
+		return NONE;
 	}
 }

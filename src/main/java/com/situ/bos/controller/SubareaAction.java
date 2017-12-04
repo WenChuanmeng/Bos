@@ -125,4 +125,14 @@ public class SubareaAction extends BaseAction<Subarea>{
 		}
 		return NONE;
 	}
+	
+	/**
+	 * 查询所有未关联到定去的分区
+	 */
+	public String listajax() {
+		
+		List<Subarea> list = subareaService.findListNotAssociation();
+		object2jsonList(list, new String[]{"decidedzone", "region"});
+		return NONE;
+	}
 }

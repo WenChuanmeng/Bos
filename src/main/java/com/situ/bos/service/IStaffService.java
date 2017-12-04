@@ -1,5 +1,7 @@
 package com.situ.bos.service;
 
+import java.util.List;
+
 import com.situ.bos.pojo.Staff;
 import com.situ.bos.vo.PageBean;
 
@@ -35,5 +37,11 @@ public interface IStaffService {
 	 * @param staff
 	 */
 	void update(Staff staff);
+
+	/**
+	 * 查询没有被删除的取派员
+	 * @return List<Staff>
+	 */
+	List<Staff> findListNotDelete();
 
 }
