@@ -84,6 +84,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		
 		//rows 当前页数据
 		deCriteria.setProjection(null);
+		deCriteria.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
 		int firstResult = (currentPage - 1) * pageSize;
 		List<?> rows = getHibernateTemplate().findByCriteria(deCriteria, firstResult, pageSize);
 		pageBean.setRows(rows);
