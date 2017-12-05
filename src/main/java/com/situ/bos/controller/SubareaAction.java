@@ -135,4 +135,16 @@ public class SubareaAction extends BaseAction<Subarea>{
 		object2jsonList(list, new String[]{"decidedzone", "region"});
 		return NONE;
 	}
+	
+	private String decidezoneId;
+	public void setDecidezoneId(String decidezoneId) {
+		this.decidezoneId = decidezoneId;
+	}
+
+	public String findListByDecidezoneId() {
+		
+		List<Subarea> list = subareaService.findListByDecidezoneId(decidezoneId);
+		object2jsonList(list, new String[]{"decidedzone", "subareas"});
+		return NONE;
+	}
 }

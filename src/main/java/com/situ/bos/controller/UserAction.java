@@ -1,5 +1,7 @@
 package com.situ.bos.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.situ.bos.common.ServerResponse;
 import com.situ.bos.controller.base.BaseAction;
+import com.situ.bos.pojo.Customer;
 import com.situ.bos.pojo.User;
+import com.situ.bos.service.ICustomerService;
 import com.situ.bos.service.IUserService;
 import com.situ.bos.util.BosUtils;
 
@@ -20,7 +24,6 @@ public class UserAction extends BaseAction<User> {
 
 	@Autowired
 	private IUserService userService;
-	
 	//验证码‘
 	private String checkCode;
 	public void setCheckCode(String checkCode) {
@@ -29,7 +32,6 @@ public class UserAction extends BaseAction<User> {
 
 
 	public String login() {
-		
 		String checkCodeTemp = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		if (StringUtils.isNotBlank(checkCode) && checkCode.equalsIgnoreCase(checkCodeTemp)) {
 			//验证码正确
