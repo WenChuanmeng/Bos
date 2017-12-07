@@ -50,6 +50,15 @@
 		<action name="decidedzoneAction_*" class="decidedzoneAction" method="{1}">
 			<result name="list">/WEB-INF/pages/base/decidedzone.jsp</result>
 		</action>
+		<!-- 取派设置 -->
+		<action name="noticebillAction_*" class="noticebillAction" method="{1}">
+			<result name="list">/WEB-INF/pages/qupai/noticebill_add.jsp</result>
+		</action>
+		<!-- 工单快速录入设置 -->
+		<action name="workordermanageAction_*" class="workordermanageAction" method="{1}">
+			<result name="list">/WEB-INF/pages/qupai/quickworkorder.jsp</result>
+		</action>
+		
 	</package>
 	
 </struts>

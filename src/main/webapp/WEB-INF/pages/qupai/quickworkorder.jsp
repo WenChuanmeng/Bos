@@ -158,19 +158,23 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url :  "",
+			url :  "workordermanageAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow,
 			onAfterEdit : function(rowIndex, rowData, changes){
 				console.info(rowData);
 				editIndex = undefined;
+				$.post('workordermanageAction_add.action',rowData,function(data){
+					if (data.status == 1) {
+						$.messager.alert("提示信息",data.msg+"--可双击修改再保存","error");
+					}
+				});
 			}
 		});
 	});
 
 	function doDblClickRow(rowIndex, rowData){
-		alert("双击表格数据...");
 		console.info(rowIndex);
 		$('#grid').datagrid('beginEdit',rowIndex);
 		editIndex = rowIndex;

@@ -1,9 +1,14 @@
 package com.situ.bos.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
+/**
+ * User entity. @author MyEclipse Persistence Tools
+ */
+
+public class User implements java.io.Serializable {
+
+	// Fields
 
 	private String id;
 	private String username;
@@ -14,15 +19,24 @@ public class User implements Serializable{
 	private String station;
 	private String telephone;
 	private String remark;
-	
+
+	// Constructors
+
+	/** default constructor */
 	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public User(String id, String username, String password, Double salary, Date birthday, String gender,
-			String station, String telephone, String remark) {
-		super();
+	/** minimal constructor */
+	public User(String id, String username, String password) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
+
+	/** full constructor */
+	public User(String id, String username, String password, Double salary,
+			Date birthday, String gender, String station, String telephone,
+			String remark) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -34,142 +48,78 @@ public class User implements Serializable{
 		this.remark = remark;
 	}
 
-	/**
-	 * @return the id
-	 */
+	// Property accessors
+
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the username
-	 */
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
-	/**
-	 * @param username the username to set
-	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	/**
-	 * @return the password
-	 */
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
-	/**
-	 * @param password the password to set
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	/**
-	 * @return the salary
-	 */
 	public Double getSalary() {
-		return salary;
+		return this.salary;
 	}
 
-	/**
-	 * @param salary the salary to set
-	 */
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
 
-	/**
-	 * @return the birthday
-	 */
 	public Date getBirthday() {
-		return birthday;
+		return this.birthday;
 	}
 
-	/**
-	 * @param birthday the birthday to set
-	 */
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
-	/**
-	 * @return the gender
-	 */
 	public String getGender() {
-		return gender;
+		return this.gender;
 	}
 
-	/**
-	 * @param gender the gender to set
-	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	/**
-	 * @return the station
-	 */
 	public String getStation() {
-		return station;
+		return this.station;
 	}
 
-	/**
-	 * @param station the station to set
-	 */
 	public void setStation(String station) {
 		this.station = station;
 	}
 
-	/**
-	 * @return the telephone
-	 */
 	public String getTelephone() {
-		return telephone;
+		return this.telephone;
 	}
 
-	/**
-	 * @param telephone the telephone to set
-	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
-	/**
-	 * @return the remark
-	 */
 	public String getRemark() {
-		return remark;
+		return this.remark;
 	}
 
-	/**
-	 * @param remark the remark to set
-	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "TUser [id=" + id + ", username=" + username + ", password=" + password + ", salary=" + salary
-				+ ", birthday=" + birthday + ", gender=" + gender + ", station=" + station + ", telephone=" + telephone
-				+ ", remark=" + remark + "]";
-	}
-	
-	
-	
 }
