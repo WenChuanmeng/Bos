@@ -48,6 +48,9 @@
 				}           
 			],
 			url : '',
+			url : '${pageContext.request.contextPath }/roleAction_pageQuery.action',
+			pagination : true,
+			fit:true,
 			columns : [[
 				{
 					field : 'id',

@@ -3,6 +3,10 @@ package com.situ.bos.controller;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -35,6 +39,30 @@ public class UserAction extends BaseAction<User> {
 		String checkCodeTemp = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		if (StringUtils.isNotBlank(checkCode) && checkCode.equalsIgnoreCase(checkCodeTemp)) {
 			//验证码正确
+			//使用shiro框架进行认证
+			Subject subject = SecurityUtils.getSubject();
+			AuthenticationToken token = new UsernamePasswordToken(model.getUsername(), model.getPassword());
+			try {
+				subject.login(token);
+				User user = (User) subject.getPrincipal();
+				ServletActionContext.getRequest().getSession().setAttribute("loginUser", user);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				return LOGIN;
+			}
+			return HOME;
+		} else {
+			//验证码错误
+			this.addActionError("验证码错误");
+			return LOGIN;
+		}
+	}
+	
+	public String loginOld() {
+		String checkCodeTemp = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
+		if (StringUtils.isNotBlank(checkCode) && checkCode.equalsIgnoreCase(checkCodeTemp)) {
+			//验证码正确
 			User user = userService.login(model);
 			if (user != null) {
 				//用户名和密码正确
@@ -51,6 +79,7 @@ public class UserAction extends BaseAction<User> {
 			return LOGIN;
 		}
 	}
+	
 	
 	public String loginOut() {
 		ServletActionContext.getRequest().getSession().invalidate();
@@ -73,6 +102,24 @@ public class UserAction extends BaseAction<User> {
 			object2json(new ServerResponse().createERROR("修改失败"));
 
 		}
+		return NONE;
+	}
+	
+	private String[] roleIds;
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
+
+
+	public String add() {
+		userService.add(model, roleIds);
+		return LIST;
+	}
+	
+	public String pageQuery() {
+		
+		userService.pageQuery(pageBean);
+		object2json(pageBean, new String[]{"currentPage","deCriteria","currentSize", "noticebills", "roles"});
 		return NONE;
 	}
 }

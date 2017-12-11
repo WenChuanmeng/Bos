@@ -2,6 +2,7 @@ package com.situ.bos.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,13 +26,14 @@ public class StaffAction extends BaseAction<Staff> {
 	public String pageQuery() {
 		
 		staffService.pageQuery(pageBean);
-		object2jsonByEasyUI(pageBean);
+		object2json(pageBean, new String[]{"decidedzones","currentPage","detachedCriteria","pageSize"});
 		return NONE;
 	}
 	
 	/**
 	 * 删除取派员
 	 */
+	//@RequiresPermissions("delete-staff")
 	public String  deleteBatch() {
 		staffService.deleteBatch(ids);
 		return LIST;

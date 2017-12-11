@@ -30,7 +30,10 @@
 	$(function(){
 		$("body").css({visibility:"visible"});
 		$('#save').click(function(){
-			$('#form').submit();
+			var v = $("#form").form("validate");
+			if (v) {
+				$('#form').submit();
+			}
 		});
 	});
 </script>	
@@ -42,8 +45,8 @@
 		</div>
 	</div>
     <div region="center" style="overflow:auto;padding:5px;" border="false">
-       <form id="form" method="post" >
-           <table class="table-edit"  width="95%" align="center">
+       <form id="form" method="post" action="${pageContext.request.contextPath }/userAction_add.action" >
+           <table class="table-edit"  width="100%" align="center">
            		<tr class="title"><td colspan="4">基本信息</td></tr>
 	           	<tr><td>用户名:</td><td><input type="text" name="username" id="username" class="easyui-validatebox" required="true" /></td>
 					<td>口令:</td><td><input type="password" name="password" id="password" class="easyui-validatebox" required="true" validType="minLength[5]" /></td></tr>
@@ -74,6 +77,23 @@
 					</td>
 				</tr>
 	           	<tr><td>备注:</td><td colspan="3"><textarea style="width:80%"></textarea></td></tr>
+	           	<tr><td>选择角色:</td><td colspan="3" id="roleTD">
+	           		<script type="text/javascript">
+	           			$(function() {
+							//页面加载完成后，加载ajax请求，获取，角色数据
+							$.post(
+								'${pageContext.request.contextPath}/roleAction_listajax.action',function(data){
+									//在ajax回调函数中，解析json数据，展示为checkbox
+									for (var i = 0; i < data.length; i++) {
+										var id = data[i].id;
+										var name = data[i].name;
+										$("#roleTD").append('<input id='+id+' type="checkbox" name="roleIds" value='+id+' ><lable for='+id+' >'+name+'</lable>');
+									}
+								}		
+							);
+						});
+	           		</script>
+	           	</textarea></td></tr>
            </table>
        </form>
 	</div>

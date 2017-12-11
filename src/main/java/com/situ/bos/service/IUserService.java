@@ -1,6 +1,7 @@
 package com.situ.bos.service;
 
 import com.situ.bos.pojo.User;
+import com.situ.bos.vo.PageBean;
 
 public interface IUserService {
 
@@ -17,5 +18,18 @@ public interface IUserService {
 	 * @param password
 	 */
 	void editPassword(String id, String password);
+
+	/**
+	 * 添加用户
+	 * @param model
+	 * @param roleIds
+	 */
+	void add(User model, String[] roleIds);
+
+	/**
+	 * 分页
+	 * @param pageBean
+	 */
+	void pageQuery(PageBean pageBean);
 
 }
